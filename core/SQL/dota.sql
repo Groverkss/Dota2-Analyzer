@@ -119,22 +119,32 @@ CREATE TABLE tournament_type(
 	PRIMARY KEY(tournament)
 );
 
+CREATE TABLE player_characters(
+	hero_name varchar(255) NOT NULL,
+	steam_id varchar(255) NOT NULL,
+	wins SMALLINT NOT NULL,
+	matches_played SMALLINT NOT NULL,
+	win_rate FLOAT NOT NULL,
+	PRIMARY KEY(steam_id, hero_name)
+);
+
+
+
+
 ALTER TABLE participating_teams
 ADD FOREIGN KEY (match_id) REFERENCES matches(match_id);
 
-
 ALTER TABLE matches
 ADD FOREIGN KEY (tournament) REFERENCES tournament_type(tournament);
-
 
 ALTER TABLE base_stats
 ADD FOREIGN KEY (hero_name) REFERENCES heroes(name);
 
 ALTER TABLE abilities
-ADD FOREIGN KEY (hero_name) REFERENCES heroes(hero_name);
+ADD FOREIGN KEY (hero_name) REFERENCES heroes(name);
 
-ALTER TABLE player_character
-ADD FOREIGN KEY (hero_name) REFERENCES heroes(hero_name);
+ALTER TABLE player_characters
+ADD FOREIGN KEY (hero_name) REFERENCES heroes(name);
 
 ALTER TABLE match_description
 ADD FOREIGN KEY (match_id) REFERENCES matches(match_id);
