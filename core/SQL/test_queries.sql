@@ -93,7 +93,6 @@ INSERT INTO player_characters(hero_name,
 								steam_id,
 								wins,
 								matches_played,
-								win_rate,
-								PRIMARY)
+								win_rate)
 VALUES ();
 
