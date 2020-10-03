@@ -275,16 +275,6 @@ CREATE TABLE `players` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `players`
---
-
-LOCK TABLES `players` WRITE;
-/*!40000 ALTER TABLE `players` DISABLE KEYS */;
-INSERT INTO `players` VALUES ('Shivansh','11113333444455567','Shivansh','Shivansh','2001-02-21','Shivansh',500,'Active'),('Zshan','33333333333333333','Zeeshan','India','2001-08-06','Drow Ranger',333,'Active'),('ltc','66666666666666666','Shanjeet','India','2001-01-08','Razor',4000,'Active');
-/*!40000 ALTER TABLE `players` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `roles`
 --
 

@@ -1,13 +1,12 @@
 import pymysql
 import pymysql.cursors
 
-db = pymysql.connect(host="localhost", 
-                    user="user",
-                    password="password",
-                    db="Database",
-                    cursorclass=pymysql.cursors.DictCursor
-                    )
-
+db = pymysql.connect(host="localhost",
+                     user="user",
+                     password="password",
+                     db="Database",
+                     cursorclass=pymysql.cursors.DictCursor
+                     )
 
 # Executing a command:
 
@@ -21,7 +20,7 @@ c.execute("""SELECT * FROM {db}""", db)
 
 c.fetchone()
 
-# To fetch the remaining rows from the output, we 
+# To fetch the remaining rows from the output, we
 # use fetchall() It fetches only the remaining ones
 # and not the ones that have been already fetched.
 
