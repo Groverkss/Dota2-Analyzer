@@ -1,17 +1,17 @@
 table_names = ["players",
-               "abilities",
+               "tournament_type",
                "matches",
                "participating_teams",
-               "match_description",
-               "teams",
                "heroes",
-               "teams_teams",
                "base_stats",
+               "abilities",
+               "player_characters",
+               "match_description",
                "match_performance",
+               "teams",
+               "teams_teams",
                "roles",
-               "teams_player",
-               "tournament_type",
-               "player_characters"]
+               "teams_player"]
 
 all_quotes = [
             [1, 1, 1, 1, 1, 1, 0, 1],
