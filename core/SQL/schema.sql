@@ -26,7 +26,7 @@ CREATE TABLE matches(
 	mvp varchar(255) NOT NULL,
 	loser varchar(255) NOT NULL,
 	tournament varchar(255) NOT NULL,
-    	duration SMALLINT NOT NULL,
+    duration SMALLINT NOT NULL,
 	PRIMARY KEY(match_id)
 );
 
@@ -119,6 +119,7 @@ CREATE TABLE tournament_type(
 	PRIMARY KEY(tournament)
 );
 
-ALTER TABLE participating_teams
-ADD FOREIGN KEY (match_id) REFERENCES matches(<attr in table2>);
+ALTER TABLE <table1>
+ADD FOREIGN KEY <attr in table1> 
+REFERENCES <table2>(<attr in table2>);
 
