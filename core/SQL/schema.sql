@@ -41,8 +41,9 @@ CREATE TABLE match_description(
 	match_id varchar(255),
 	steam_id varchar(255),
 	hero_name varchar(255) NOT NULL,
-	teams varchar(255) NOT NULL,
-	PRIMARY KEY (match_id, steam_id),
+	team_1 varchar(255) NOT NULL,
+	team_2 varchar(255) NOT NULL,
+	PRIMARY KEY (match_id, steam_id)
 );
 
 
@@ -58,7 +59,7 @@ CREATE TABLE teams(
 CREATE TABLE heroes(
 	name varchar(255),
 	faction varchar(255) NOT NULL,
-	primary_attribute varchar(255) NOT NULL	
+	primary_attribute varchar(255) NOT NULL,
 	lore LONGTEXT NOT NULL,
 	PRIMARY KEY(name)
 );
@@ -128,71 +129,65 @@ CREATE TABLE player_characters(
 	PRIMARY KEY(hero_name, steam_id)
 );
 
-
-ALTER TABLE <table1>
-ADD FOREIGN KEY <attr in table1> 
-REFERENCES <table2>(<attr in table2>);
-
-
-ALTER TABLE matches
-ADD FOREIGN KEY tournament 
+ALTER TABLE matches 
+ADD FOREIGN KEY (tournament) 
 REFERENCES tournament_type(tournament);
 
 ALTER TABLE participating_teams
-ADD FOREIGN KEY match_id 
+ADD FOREIGN KEY (match_id) 
 REFERENCES matches(match_id);
 
 ALTER TABLE base_stats
-ADD FOREIGN KEY hero_name 
+ADD FOREIGN KEY (hero_name) 
 REFERENCES heroes(name);
 
 ALTER TABLE abilities
-ADD FOREIGN KEY hero_name 
+ADD FOREIGN KEY (hero_name) 
 REFERENCES heroes(name);
 
 ALTER TABLE player_characters
-ADD FOREIGN KEY hero_name
+ADD FOREIGN KEY (hero_name)
 REFERENCES heroes(name);
 
-ALTER TABLE match_performance
-ADD FOREIGN KEY match_id 
-REFERENCES matches(match_id);
-
-ALTER TABLE match_description
-ADD FOREIGN KEY match_id
-REFERENCES matches(match_id);
-
-ALTER TABLE match_performance
-ADD FOREIGN KEY steam_id 
-REFERENCES player(steam_id);
-
-ALTER TABLE match_description
-ADD FOREIGN KEY steam_id 
-REFERENCES player(steam_id);
-
 ALTER TABLE player_characters
-ADD FOREIGN KEY steam_id
-REFERENCES player(steam_id);
+ADD FOREIGN KEY (steam_id)
+REFERENCES players(steam_id);
+
+ALTER TABLE match_performance
+ADD FOREIGN KEY (match_id) 
+REFERENCES matches(match_id);
+
+ALTER TABLE match_performance
+ADD FOREIGN KEY (steam_id)
+REFERENCES players(steam_id);
+
+ALTER TABLE match_description
+ADD FOREIGN KEY (match_id)
+REFERENCES matches(match_id);
+
+ALTER TABLE match_description
+ADD FOREIGN KEY (steam_id) 
+REFERENCES players(steam_id);
 
 ALTER TABLE teams
-ADD FOREIGN KEY player
-REFERENCES player(steam_id);
+ADD FOREIGN KEY (player)
+REFERENCES players(steam_id);
 
 ALTER TABLE teams_player
-ADD FOREIGN KEY steam_id
-REFERENCES player(steam_id);
+ADD FOREIGN KEY (player_id)
+REFERENCES players(steam_id);
 
 ALTER TABLE roles
-ADD FOREIGN KEY steam_id
-REFERENCES player(steam_id);
+ADD FOREIGN KEY (steam_id)
+REFERENCES players(steam_id);
 
 ALTER TABLE teams_teams
-ADD FOREIGN KEY player_11
-REFERENCES player(steam_id);
+ADD FOREIGN KEY (player_11)
+REFERENCES players(steam_id);
 
 ALTER TABLE teams_teams
-ADD FOREIGN KEY player_21
-REFERENCES player(steam_id);
+ADD FOREIGN KEY (player_21)
+REFERENCES players(steam_id);
 
 
 
