@@ -1,42 +1,68 @@
-hero_name, ability_name, manacost, cooldown, description
 Lone Druid, Summon Spirit Bear, 75, 120, Summons a powerful Spirit Bear that can equip items, 
 Lone Druid, Spirit Link, 0, 0, Increases the damage dealt,
 Lone Druid, Savage Roar, 50, 38, Causes the nearby enemies to flee,
 Lone Druid, True Form, 200, 100, Morphs To Himself into a raging bear,
+
 Terrorblade, Reflection, 50, 22, Brings forth an invulnerable reflection,
 Terrorblade, Conjure Image, 70, 16, Creates an Illusion,
 Terrorblade, Terror Wave, 75, 90, Creates a Terror Wave,
 Terrorblade, Metamorphisis, 100, 155, Transforms into a powerful demons,
 Terrorblade, Sunder, 200, 120, Severs health from target and user,
+
 Enigma, Malefice, 100, 18, Focus's energy on target,
 Enigma, Demonic Conversion, 140, 35, Transforms a creep into a creature,
 Enigma, Midnight Pulse, 50, 50, Steeps an Area in dark resonance, 
 Enigma, Black Hole, 300, 200, Summons a vortex,
+
 Rubick, Telekenisis, 125, 34, Lifts the enemy,
 Rubick, Fade Bolt, 135, 16, Creates a powerful of arcane energy,
 Rubick, Arcane Supremacy, 0, 0, Allows to deal with more damage
 Rubick, Spell Steal, 25, 20, Steals a spell of other hero,
+
 Chen, Penitence, 70, 14, Slows the enemy,
 Chen, Holy Persuasion, 90, 15, Takes control of a creep,
 Chen, Divine Favour, 130, 140, Health regeneration,s
 Chen, Hand of god, 250, 160, Heals an ally, 
+
 Meepo, Earthbind, 100, 20, Tosses a net at the target point,
 Meepo, Poof, 80, 12, Draws mystical energies from the earth,
 Meepo, Ransack, 0, 0, Steals health from target after each strike, 
 Meepo, Divided We Stand, 0, 0, Summons a duplicate of himself,
+
 Mirana, Starstorm, 80, 12, Calls down a wave meteors,
 Mirana, Sacred Arrow, 100, 18, Fires a long range with precision,
 Mirana, Leap, 40, 0, Leaps forward into battle,
 Mirana, MoonLight Shadow, 125, 140, Grants Invisibility,
+
 Io, Tether, 40, 12, Bonus movement speed,
 Io, Spirits, 120, 26, Summon five particles,
 Io, Overcharge, 40, 22, HP regenations,
 Io, Relocate, 175, 90, Teleports Io to a different place,
+
 Morphling, Waveform, 150, 20, Dissolves the enemies, 
 Morphling, Adaptive Strike, 80, 10, Launches a surge of water,
-Morphling, Morph, 50, 160, Changes form to match the targeted enemy 
-Puck, 
-Magnus, 
-Bane, 
-Monkey King, 
-Invoker, 
+Morphling, Morph, 50, 160, Changes form to match the targeted enemy,
+
+Puck, Illusory orb, 80, 13, Launches a magic orb that floats in a straight path,
+Puck, Waning Rift, 100, 16, Teleports to a location and deals splash damage,
+Puck, Phase Shift, 0, 6, Shifts into another dimension with no harm,
+Puck, Dream Coil, 100, 70, Creates a coil of volatile Magic,
+
+Magnus,  Shockwave, 90, 13, Sends a wave of force dealing damage,
+Magnus,  Empower, 45, 8, Gives an ally boost of damage,
+Magnus, Skewer80, 26, Magnus rushes forward with his massive tusk,  
+Magnus,  Reverse Polarity, 200, 130, Changes properties of matter and sucks all the enemies towards himm
+
+Bane, Nightmare, 165, 22, Puts the target to sleep,
+Bane, Brain Sap, 90, 14, Feasts on the vital energies of the target,
+Bane, Feind's Grip, 200, 120, Grips an enemy unit with damage and immobility,
+
+Monkey King, Boundless Strike, 100, 22, Elarges his staff and strikes it,
+Monkey King, Primal Spring, 100, 19, Springs out from his Tree perch and does damage,
+Monkey King, Mischief, 0, 20, Changes shape to decieve opponents,
+Monkey King, Wukong's Command, 100, 130, Creates a circular formation of soldiers and spreads them from his position,
+
+Invoker, Quas, 0, 0, Health regeneration,
+Invoker, Wex, 0, 0, Increases attack speed, 
+Invoker, Exort, 0, 0, Increases attack damage, 
+Invoker, Cold Snap, 100, 20, Draws heat from the enemy and causes damage,
