@@ -11,9 +11,9 @@ def insert_row(table_name, values):
 
     # Add values to query
     for i in range(0, no_attrs - 1):
-        query += f'{strip_space(values[i])}, '
+        query += f'{values[i]}, '
 
     # Add semicolon for last value
-    query += f'{strip_space(values[no_attrs - 1])});'
+    query += f'{values[no_attrs - 1]});'
 
     print(query)
