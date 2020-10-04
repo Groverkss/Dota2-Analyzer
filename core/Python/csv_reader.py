@@ -53,3 +53,23 @@ def Insert_csv(address, table_name):
 
 for table in table_names:
 	Insert_csv(f"../data/{table}.csv", table)
+
+# table_names = ["players",
+#                "tournament_type",
+#                "matches",
+#                "participating_teams",
+#                "heroes",
+#                "base_stats",
+#                "abilities",
+#                "player_characters",
+#                "match_description",
+#                "match_performance",
+#                "teams",
+#                "teams_teams",
+#                "roles",
+#                "teams_player"]
+
+# table = "teams_player"
+# Insert_csv(f"../data/{table}.csv", table)
+
+# select * from teams_player;
