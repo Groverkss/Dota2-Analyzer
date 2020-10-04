@@ -1,4 +1,4 @@
-import pandas as pd
+import numpy as np
 from query import *
 from config import * 
 
@@ -17,28 +17,26 @@ def csv_reader(address, list_size, quotes):
         quotes is a one hot vector which represents which position
         need to be surrounded by \"\" 
     """
-    df = list(pd.read_csv(address))
-
+    df = np.loadtxt(address, dtype = np.str, delimiter=",")
     rows = []
     """Splitting the csv file into rows"""
     for i in range(0, len(df), list_size):
     	rows.append(list(df[i : i + list_size]))
     """Cleaning the entries by inserting quotes"""
     for row in rows:
-    	for index in range(0, list_size):
+    	for index in range(0, len(row)):
     		row[index] = strip_space(row[index])
     		if(quotes[index] == 1):
     			row[index] = add_quotes(row[index])
 
     """ Converting numbers to int or float"""
     for row in rows:
-    	for index in range(0, list_size):
+    	for index in range(0, len(row)):
     		if quotes[index] == 0:
     			"""Skipping dates"""
     			if row[index].find('-') != -1:
     				continue
-    			"""If there is a decimal point we make it float"""
-    			else if row[index].find('.') != -1:
+    			elif row[index].find('.') != -1:
     			 	row[index] = float(row[index])
     			else:
     			 	row[index] = int(row[index])
@@ -53,6 +51,5 @@ def Insert_csv(address, table_name):
 		insert_row(table_name, row)
 
 
-# Insert_csv("../data/old/teams.csv", "teams")
-Insert_csv("../data/old/tournament_type.csv", "tournament_type")
-# Insert_csv("../data/old/players.csv", "players")
+for table in table_names:
+	Insert_csv(f"../data/{table}.csv", table)
