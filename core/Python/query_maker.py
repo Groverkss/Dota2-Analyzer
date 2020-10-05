@@ -2,11 +2,8 @@ import config
 
 def all_match_team(team):
 	'''Returns the query required to display all the matches played by a team'''
-	query = f'WITH matches_id AS (SELECT match_id FROM participating_teams WHERE\
-	team_1 = "{team}" OR team_2 = "{team}") \
-	SELECT matches.match_id, matches.winner, matches.mvp, matches.loser,\
-	matches.tournament, matches.duration FROM matches, matches_id WHERE\
-	matches.match_id = matches_id.match_id;'
+	query = f'SELECT * FROM matches \
+	WHERE (winner = "{team}" OR loser = "{team}");'
 	return query
 
 def all_match_player(player):
@@ -15,19 +12,14 @@ def all_match_player(player):
 	steam_name = "{player}")\
 	, matches_id AS (SELECT match_id FROM match_description, player_id WHERE\
 	player_id.steam_id = match_description.steam_id)\
-	SELECT matches.match_id, matches.winner, matches.mvp, matches.loser,\
-	matches.tournament, matches.duration FROM matches, matches_id WHERE\
+	SELECT matches.* FROM matches, matches_id WHERE\
 	matches.match_id = matches_id.match_id;'
 	return query
 
 def all_match_two_teams(team_1, team_2):
 	'''Returns the query required to display all the matches played betwee 2 teams'''
-	query = f'WITH matches_id AS (SELECT match_id FROM participating_teams WHERE\
-	(team_1 = "{team_1}" AND team_2 = "{team_2}") OR \
-	(team_1 = "{team_2}" AND team_2 = "{team_1}")) \
-	SELECT matches.match_id, matches.winner, matches.mvp, matches.loser,\
-	matches.tournament, matches.duration FROM matches, matches_id WHERE\
-	matches.match_id = matches_id.match_id;'
+	query = f'SELECT * FROM matches \
+	WHERE (winner LIKE "{team}" OR loser LIKE "{team}");'
 	return query
 
 def hero_win_rate(win_rate):
@@ -42,8 +34,8 @@ def hero_win_rate_all(win_rate):
 	query = f'WITH hero_aggr AS (SELECT hero_name, SUM(wins) AS wins, \
 	SUM(matches_played) AS matches_played FROM\
 	 player_characters GROUP BY hero_name)\
-	SELECT hero_name, (wins/matches_played) AS win_rate FROM\
-	 hero_aggr WHERE (wins/matches_played) > {win_rate};'
+	SELECT hero_name, wins FROM\
+	 hero_aggr WHERE wins >= {win_rate} * matches_played;'
 	return query
 
 def win_rate_attr(attribute):
@@ -54,6 +46,17 @@ def win_rate_attr(attribute):
 	 player_characters.matches_played FROM hero_req JOIN player_characters ON \
 	 hero_req.name = player_characters.hero_name)\
 	 SELECT primary_attribute, SUM(wins)/SUM(matches_played) AS win_rate FROM hero_det;'
+	return query
+
+def player_attr_wins(player, attribute):
+	'''For a given player and attribute, it returns the number of wins'''
+	query = f'WITH id AS (SELECT steam_id FROM players \
+	WHERE steam_name = '{player}'), player_heroes AS \
+	(SELECT player_characters.wins, player_characters.hero_name \
+	FROM player_characters, id WHERE player_characters.steam_id = id.steam_id) \
+	SELECT COUNT(wins) FROM player_heroes, heroes \
+	WHERE (heroes.primary_attribute = '{attribute}' \
+	AND player_heroes.hero_name = heroes.name);'
 	return query
 
 def total_time_player(player):
