@@ -38,7 +38,7 @@ CREATE TABLE participating_teams(
 );
 
 CREATE TABLE match_description(
-	match_id varchar(255),
+	match_id varchar(255),	
 	steam_id varchar(255),
 	hero_name varchar(255) NOT NULL,
 	team_1 varchar(255) NOT NULL,
@@ -125,7 +125,6 @@ CREATE TABLE player_characters(
 	steam_id varchar(255) NOT NULL,
 	wins SMALLINT NOT NULL,
 	matches_played SMALLINT NOT NULL,
-	win_rate FLOAT NOT NULL,
 	PRIMARY KEY(hero_name, steam_id)
 );
 
@@ -191,3 +190,4 @@ REFERENCES players(steam_id);
 
 
 
+-- SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));
