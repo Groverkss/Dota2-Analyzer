@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.21, for Linux (x86_64)
+-- MariaDB dump 10.17  Distrib 10.5.5-MariaDB, for debian-linux-gnu (x86_64)
 --
--- Host: 127.0.0.1    Database: test
+-- Host: localhost    Database: dota
 -- ------------------------------------------------------
--- Server version	8.0.21
+-- Server version	10.5.5-MariaDB-1:10.5.5+maria~focal
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8mb4 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,16 +21,16 @@
 
 DROP TABLE IF EXISTS `abilities`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `abilities` (
-  `hero_name` varchar(255) NOT NULL,
-  `ability_name` varchar(255) NOT NULL,
-  `manacost` smallint NOT NULL,
-  `cooldown` smallint NOT NULL,
-  `description` text,
+  `hero_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ability_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `manacost` smallint(6) NOT NULL,
+  `cooldown` smallint(6) NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`hero_name`,`ability_name`),
   CONSTRAINT `abilities_ibfk_1` FOREIGN KEY (`hero_name`) REFERENCES `heroes` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -49,23 +49,23 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `base_stats`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `base_stats` (
-  `hero_name` varchar(255) NOT NULL,
+  `hero_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `turn_rate` float NOT NULL,
   `hp_regen` float NOT NULL,
   `mana_regen` float NOT NULL,
   `sight_range` float NOT NULL,
   `attack_range` float NOT NULL,
-  `missile_range` float NOT NULL DEFAULT '0',
-  `attack_duration` int NOT NULL,
-  `cast_duration` int NOT NULL,
-  `magic_resist` float NOT NULL DEFAULT '0',
+  `missile_range` float NOT NULL DEFAULT 0,
+  `attack_duration` int(11) NOT NULL,
+  `cast_duration` int(11) NOT NULL,
+  `magic_resist` float NOT NULL DEFAULT 0,
   `attack_speed` float NOT NULL,
-  `attack_time` int NOT NULL,
+  `attack_time` int(11) NOT NULL,
   PRIMARY KEY (`hero_name`),
   CONSTRAINT `base_stats_ibfk_1` FOREIGN KEY (`hero_name`) REFERENCES `heroes` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -84,14 +84,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `heroes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `heroes` (
-  `name` varchar(255) NOT NULL,
-  `faction` varchar(255) NOT NULL,
-  `primary_attribute` varchar(255) NOT NULL,
-  `lore` longtext NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `faction` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `primary_attribute` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lore` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -110,18 +110,18 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `match_description`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `match_description` (
-  `match_id` varchar(255) NOT NULL,
-  `steam_id` varchar(255) NOT NULL,
-  `hero_name` varchar(255) NOT NULL,
-  `team_1` varchar(255) NOT NULL,
-  `team_2` varchar(255) NOT NULL,
+  `match_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `steam_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `hero_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `team_1` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `team_2` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`match_id`,`steam_id`),
   KEY `steam_id` (`steam_id`),
   CONSTRAINT `match_description_ibfk_1` FOREIGN KEY (`match_id`) REFERENCES `matches` (`match_id`),
   CONSTRAINT `match_description_ibfk_2` FOREIGN KEY (`steam_id`) REFERENCES `players` (`steam_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -140,18 +140,18 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `match_performance`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `match_performance` (
-  `match_id` varchar(255) NOT NULL,
-  `steam_id` varchar(255) NOT NULL,
-  `kills` smallint NOT NULL DEFAULT '0',
-  `deaths` smallint NOT NULL DEFAULT '0',
-  `assists` smallint NOT NULL DEFAULT '0',
+  `match_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `steam_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `kills` smallint(6) NOT NULL DEFAULT 0,
+  `deaths` smallint(6) NOT NULL DEFAULT 0,
+  `assists` smallint(6) NOT NULL DEFAULT 0,
   PRIMARY KEY (`match_id`,`steam_id`),
   KEY `steam_id` (`steam_id`),
   CONSTRAINT `match_performance_ibfk_1` FOREIGN KEY (`match_id`) REFERENCES `matches` (`match_id`),
   CONSTRAINT `match_performance_ibfk_2` FOREIGN KEY (`steam_id`) REFERENCES `players` (`steam_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -170,18 +170,18 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `matches`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `matches` (
-  `match_id` varchar(255) NOT NULL,
-  `winner` varchar(255) NOT NULL,
-  `mvp` varchar(255) NOT NULL,
-  `loser` varchar(255) NOT NULL,
-  `tournament` varchar(255) NOT NULL,
-  `duration` smallint NOT NULL,
+  `match_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `winner` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mvp` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `loser` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tournament` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `duration` smallint(6) NOT NULL,
   PRIMARY KEY (`match_id`),
   KEY `tournament` (`tournament`),
   CONSTRAINT `matches_ibfk_1` FOREIGN KEY (`tournament`) REFERENCES `tournament_type` (`tournament`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -200,14 +200,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `participating_teams`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `participating_teams` (
-  `match_id` varchar(255) NOT NULL,
-  `team_1` varchar(255) NOT NULL,
-  `team_2` varchar(255) NOT NULL,
+  `match_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `team_1` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `team_2` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`match_id`),
   CONSTRAINT `participating_teams_ibfk_1` FOREIGN KEY (`match_id`) REFERENCES `matches` (`match_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -226,17 +226,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `player_characters`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `player_characters` (
-  `hero_name` varchar(255) NOT NULL,
-  `steam_id` varchar(255) NOT NULL,
-  `wins` smallint NOT NULL,
-  `matches_played` smallint NOT NULL,
+  `hero_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `steam_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `wins` smallint(6) NOT NULL,
+  `matches_played` smallint(6) NOT NULL,
   PRIMARY KEY (`hero_name`,`steam_id`),
   KEY `steam_id` (`steam_id`),
   CONSTRAINT `player_characters_ibfk_1` FOREIGN KEY (`hero_name`) REFERENCES `heroes` (`name`),
   CONSTRAINT `player_characters_ibfk_2` FOREIGN KEY (`steam_id`) REFERENCES `players` (`steam_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -255,18 +255,18 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `players`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `players` (
-  `steam_name` varchar(255) NOT NULL,
-  `steam_id` varchar(255) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `country_of_origin` varchar(255) NOT NULL,
+  `steam_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `steam_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `country_of_origin` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `date_of_birth` date NOT NULL,
-  `signature_hero` varchar(255) NOT NULL,
-  `playtime` smallint NOT NULL DEFAULT '0',
-  `status` varchar(255) DEFAULT NULL,
+  `signature_hero` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `playtime` smallint(6) NOT NULL DEFAULT 0,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`steam_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -285,13 +285,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `roles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `roles` (
-  `steam_id` varchar(255) NOT NULL,
-  `roles` varchar(255) NOT NULL,
+  `steam_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `roles` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`steam_id`),
   CONSTRAINT `roles_ibfk_1` FOREIGN KEY (`steam_id`) REFERENCES `players` (`steam_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -310,15 +310,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `teams`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `teams` (
-  `team_name` varchar(255) NOT NULL,
-  `player` varchar(255) NOT NULL,
-  `losses` smallint NOT NULL,
-  `wins` smallint NOT NULL,
+  `team_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `player` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `losses` smallint(6) NOT NULL,
+  `wins` smallint(6) NOT NULL,
   PRIMARY KEY (`player`),
   CONSTRAINT `teams_ibfk_1` FOREIGN KEY (`player`) REFERENCES `players` (`steam_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -337,15 +337,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `teams_player`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `teams_player` (
-  `player_id` varchar(255) NOT NULL,
-  `team_name` varchar(255) NOT NULL,
+  `player_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `team_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `join_date` date NOT NULL,
-  `participation` smallint NOT NULL DEFAULT '0',
+  `participation` smallint(6) NOT NULL DEFAULT 0,
   PRIMARY KEY (`player_id`),
   CONSTRAINT `teams_player_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `players` (`steam_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -364,19 +364,19 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `teams_teams`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `teams_teams` (
-  `team_1` varchar(255) NOT NULL,
-  `team_2` varchar(255) NOT NULL,
-  `player_11` varchar(255) NOT NULL,
-  `player_21` varchar(255) NOT NULL,
-  `losses` smallint NOT NULL,
-  `wins` smallint NOT NULL,
+  `team_1` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `team_2` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `player_11` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `player_21` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `losses` smallint(6) NOT NULL,
+  `wins` smallint(6) NOT NULL,
   PRIMARY KEY (`player_11`,`player_21`),
   KEY `player_21` (`player_21`),
   CONSTRAINT `teams_teams_ibfk_1` FOREIGN KEY (`player_11`) REFERENCES `players` (`steam_id`),
   CONSTRAINT `teams_teams_ibfk_2` FOREIGN KEY (`player_21`) REFERENCES `players` (`steam_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -395,12 +395,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tournament_type`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tournament_type` (
-  `tournament` varchar(255) NOT NULL,
-  `type` varchar(255) NOT NULL,
+  `tournament` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`tournament`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -422,4 +422,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-05 17:57:40
+-- Dump completed on 2020-10-05 18:40:41
