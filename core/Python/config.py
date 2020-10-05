@@ -13,41 +13,63 @@ table_names = ["players",
                "roles",
                "teams_player"]
 
-all_quotes = [
-    [1, 1, 1, 1, 1, 1, 0, 1],  # players
-    [1, 1],  # tournament_type
-    [1, 1, 1, 1, 1, 0],  # matches
-    [1, 1, 1],  # participating_teams
-    [1, 1, 1, 1],  # heroes
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # base_stats
-    [1, 1, 0, 0, 1],  # abilities
-    [1, 1, 0, 0, 0],  # player_characters
-    [1, 1, 1, 1, 1],  # match_description
-    [1, 1, 0, 0, 0],  # match_performance
-    [1, 1, 0, 0],  # teams
-    [1, 1, 1, 1, 0, 0],  # teams_teams
-    [1, 1],  # roles
-    [1, 1, 1, 0]  # teams_player
-]
-
-
 attrs = [
-    ["steam_name", "steam_id", "name", "country_of_origin",
-        "date_of_birth", "signature_hero", "playtime", "status"],  # players
-    ["tournament", "type"],  # tournament_type
-    ["match_id", "winner", "mvp", "loser", "tournament", "duration"],  # matches
-    ["match_id", "team_1", "team_2"],  # participating teams
-    ["name", "faction", "primary_attribute", "lore"],  # heroes
-    ["hero_name", "turn_rate", "hp_regen", "mana_regen", "sight_range", "attack_range", "missile_range",
-        "attack_duration", "cast_duration", "magic_resist", "attack_speed", "attack_time"],  # base_stats
-    ["hero_name", "ability_name", "manacost",
-        "cooldown", "description"],  # abilities
-    ["hero_name", "steam_id", "wins", "matches_played",
-        "win_rate"],  # player characters
-    ["match_id", "steam_id", "hero_name", "team_1", "team_2"],  # match description
-    ["match_id", "steam_id", "kills", "deaths", "assists"],  # match performance
-    ["team_name", "player", "losses", "wins"],  # teams
-    ["team_1", "team_2", "player_11", "player_21", "losses", "wins"],  # teams-teams
-    ["steam_id", "roles"],  # roles
-    ["player_id", "team_name", "join_date", "participation"]  # teams-player
+    [('steam_name', 1),
+     ('steam_id', 1),
+        ('name', 1),
+        ('country_of_origin', 1),
+        ('date_of_birth', 1),
+        ('signature_hero', 1),
+        ('playtime', 0),
+        ('status', 1)],
+    [('tournament', 1), ('type', 1)],
+    [('match_id', 1),
+        ('winner', 1),
+        ('mvp', 1),
+        ('loser', 1),
+        ('tournament', 1),
+        ('duration', 0)],
+    [('match_id', 1), ('team_1', 1), ('team_2', 1)],
+    [('name', 1), ('faction', 1), ('primary_attribute', 1), ('lore', 1)],
+    [('hero_name', 1),
+        ('turn_rate', 0),
+        ('hp_regen', 0),
+        ('mana_regen', 0),
+        ('sight_range', 0),
+        ('attack_range', 0),
+        ('missile_range', 0),
+        ('attack_duration', 0),
+        ('cast_duration', 0),
+        ('magic_resist', 0),
+        ('attack_speed', 0),
+        ('attack_time', 0)],
+    [('hero_name', 1),
+        ('ability_name', 1),
+        ('manacost', 0),
+        ('cooldown', 0),
+        ('description', 1)],
+    [('hero_name', 1),
+        ('steam_id', 1),
+        ('wins', 0),
+        ('matches_played', 0),
+        ('win_rate', 0)],
+    [('match_id', 1),
+        ('steam_id', 1),
+        ('hero_name', 1),
+        ('team_1', 1),
+        ('team_2', 1)],
+    [('match_id', 1),
+        ('steam_id', 1),
+        ('kills', 0),
+        ('deaths', 0),
+        ('assists', 0)],
+    [('team_name', 1), ('player', 1), ('losses', 0), ('wins', 0)],
+    [('team_1', 1),
+        ('team_2', 1),
+        ('player_11', 1),
+        ('player_21', 1),
+        ('losses', 0),
+        ('wins', 0)],
+    [('steam_id', 1), ('roles', 1)],
+    [('player_id', 1), ('team_name', 1), ('join_date', 1), ('participation', 0)]
 ]

@@ -1,5 +1,6 @@
 import click
 from click_shell import shell
+import updateq
 
 
 # Class to handle shell exiting
@@ -17,26 +18,30 @@ on_shell_exit = OnExit()
 def dota():
     pass
 
+@dota.command()
+def list_tables():
+    '''Lists available tables in database'''
+    print("Listing available tables")
 
 @dota.command()
 @click.argument('table')
 def insert(table):
     '''Insert data into the corresponding TABLE'''
-    print(f'Inserting in table {table}')
+    updateq.insert(table)
 
 
 @dota.command()
 @click.argument('table')
 def delete(table):
     '''Delete data from the corresponding TABLE'''
-    print(f'Deleting from table {table}')
+    updateq.delete(table)
 
 
 @dota.command()
 @click.argument('table')
 def modify(table):
     '''Modify data from a corresponding TABLE'''
-    print(f'Modifying from table {table}')
+    updateq.modify(table)
 
 # --- Retrival Commands Start ---
 
