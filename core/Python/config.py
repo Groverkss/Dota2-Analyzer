@@ -21,7 +21,7 @@ all_quotes = [
             [1, 1, 1, 1], #heroes
             [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], #base_stats
             [1, 1, 0, 0, 1], #abilities
-            [1, 1, 0, 0, 0], #player_characters
+            [1, 1, 0, 0], #player_characters
             [1, 1, 1, 1, 1], #match_description
             [1, 1, 0, 0, 0], #match_performance
             [1, 1, 0, 0], #teams
@@ -39,7 +39,7 @@ attrs = [
     ["name","faction","primary_attribute", "lore"], #heroes
     ["hero_name", "turn_rate", "hp_regen", "mana_regen", "sight_range", "attack_range", "missile_range", "attack_duration", "cast_duration", "magic_resist", "attack_speed", "attack_time"], #base_stats
     ["hero_name","ability_name","manacost","cooldown","description"], #abilities
-    ["hero_name", "steam_id", "wins", "matches_played", "win_rate"], #player characters
+    ["hero_name", "steam_id", "wins", "matches_played"], #player characters
     ["match_id","steam_id", "hero_name","team_1", "team_2"], #match description
     ["match_id", "steam_id", "kills", "deaths", "assists"], #match performance
     ["team_name","player","losses","wins"], #teams

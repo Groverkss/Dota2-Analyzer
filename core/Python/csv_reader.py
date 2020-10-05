@@ -69,7 +69,7 @@ for table in table_names:
 #                "roles",
 #                "teams_player"]
 
-# table = "teams_player"
+# table = "player_characters"
 # Insert_csv(f"../data/{table}.csv", table)
 
 # select * from teams_player;
