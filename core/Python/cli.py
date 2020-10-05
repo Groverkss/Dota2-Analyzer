@@ -1,6 +1,7 @@
 import click
 from click_shell import shell
 import updateq
+import db_conn
 
 
 # Class to handle shell exiting
@@ -18,10 +19,12 @@ on_shell_exit = OnExit()
 def dota():
     pass
 
+
 @dota.command()
 def list_tables():
     '''Lists available tables in database'''
     print("Listing available tables")
+
 
 @dota.command()
 @click.argument('table')
@@ -62,14 +65,14 @@ def select():
 @click.argument('team')
 def team_matches(team):
     '''Get all matches played by a team'''
-    print(f'Getting all matches played by team {team}')
+    db_conn.team_matches(team)
 
 
 @select.command()
 @click.argument('player')
 def player_match(player):
     '''Get all matches player by a player'''
-    print(f'Getting all matches played by player {player}')
+    db_conn.player_matches(player)
 
 
 @select.command()
@@ -77,7 +80,7 @@ def player_match(player):
 @click.argument('team2')
 def match_against(team1, team2):
     '''Get all matches played between 2 given teams'''
-    print(f'Getting all matches played between team {team1} and {team2}')
+    db_conn.match_against(team1, team2)
 
 # --- Select Commands End ---
 
@@ -94,14 +97,14 @@ def project():
 @click.argument('x')
 def winrate_greater_player(player, x):
     '''Get all Heroes with win-rate >= x, for a certain player'''
-    pass
+    db_conn.winrate_greater_player(player, x)
 
 
 @project.command()
 @click.argument('x')
 def winrate_greater(x):
     '''Get all Heroes with win-rate >= x'''
-    pass
+    db_conn.winrate_greater(x)
 
 # --- Project Commands End ---
 
@@ -118,21 +121,20 @@ def aggregate():
 @click.argument('primary_att')
 def wins_by_pattr(player, primary_att):
     '''Total wins by a player for all heroes of a given primary attribute'''
-    pass
-
+    db_conn.wins_by_pattr(player, primary_att)
 
 @aggregate.command()
 @click.argument('player')
 def total_time(player):
     '''Total time by a player in all the matches'''
-    pass
+    db_conn.total_time(player)
 
 
 @aggregate.command()
 @click.argument('player')
 def total_wins(player):
     '''Total wins by player in all the matches'''
-    pass
+    db_conn.total_wins(player)
 
 # --- Aggregate Commands End
 
@@ -148,14 +150,14 @@ def search():
 @click.argument('hero')
 def find_hero(hero):
     '''Get info about a hero. Supports partial text match'''
-    pass
+    db_conn.find_hero(hero)
 
 
 @search.command()
 @click.argument('player')
 def find_player(player):
-    '''Get info about a hero. Supports partial text match'''
-    pass
+    '''Get info about a player. Supports partial text match'''
+    db_conn.find_player(player)
 
 # --- Search Commands End
 
