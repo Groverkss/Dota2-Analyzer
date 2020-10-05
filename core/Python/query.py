@@ -1,6 +1,6 @@
 def strip_space(str):
     """Strips white space from left and right ends"""
-    return f"{str.lstrip().rstrip()}"
+    return str.lstrip().rstrip()
 
 
 def insert_row(table_name, values):
