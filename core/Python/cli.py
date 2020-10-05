@@ -1,5 +1,4 @@
 import click
-import sys
 from click_shell import shell
 
 
