@@ -154,3 +154,33 @@ def delete_row(table_name, values):
     query += f'{attrs[-1][0]} = {add_quote_individual(values[-1])};'
 
     return query
+
+
+## ANALYSIS
+
+def player_report():
+    '''Ranks of players based on the number of wins'''  
+    query = f'WITH team_player AS (SELECT player_id, team_name FROM teams_player)\
+            , wins AS (SELECT team_name, wins FROM teams), \
+            win_ids AS (SELECT team_player.player_id AS player_id, wins \
+            FROM team_player, wins \
+            WHERE team_player.team_name = wins.team_name) \
+            SELECT players.steam_name AS name, win_ids.wins AS wins \
+            FROM win_ids, players \
+            WHERE players.steam_id = win_ids.player_id ORDER BY wins DESC;'
+    return query
+
+
+
+def team_report():
+    query = f'SELECT team_name AS teams, wins FROM teams ORDER BY wins DESC;'
+    return query    
+
+
+def tournament_report(tournament):
+    query = f'WITH tournament AS (SELECT winner, tournament, COUNT(match_id) AS wins \
+    FROM matches GROUP BY winner, tournament ORDER BY  wins DESC, tournament ASC) \
+    SELECT * FROM tournament;'
+
+def hero_report():
+    return "hero report"

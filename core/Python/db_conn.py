@@ -6,13 +6,13 @@ import click
 import query
 import updateq
 
-db_curr = None
+db_curr = []
 
 def db_connect(host, user, password):
 	try:
-		db_conn = pymysql.connect(host= host,
-		                          user= user,
-		                          password= password,
+		db_conn = pymysql.connect(host= "localhost",
+		                          user= "dota",
+		                          password= "dota",
 		                          db='dota',
 		                          cursorclass=pymysql.cursors.DictCursor)
 		global db_curr 
@@ -41,6 +41,8 @@ def print_query(query):
     click.secho(tabulate(output, headers, tablefmt='fancy_grid'), fg='yellow')
     
 
+def list_tables():
+	print_query("show tables;")
 	
 
 def team_matches(team):
@@ -95,3 +97,21 @@ def find_player(player):
     '''Get info about a player'''
     query = query_maker.partial_search_player(player)
     print_query(query)
+
+def player_report():
+	query = query_maker.player_report()
+	print(query)
+
+def team_report():
+	query = query_maker.team_report()
+	print(query)
+
+def tournament_report(tournament):
+	query = query_maker.tournament_report(tournament)
+	print(query)
+
+def hero_report():
+	query = query_maker.hero_report()
+	print(query)
+
+
