@@ -100,21 +100,20 @@ def partial_search_player(partial_player):
     query = f'SELECT * FROM players WHERE name LIKE \'{partial_player}%\';'
     return query
 
+def add_quote_individual(value):
+    if type(value) == str:
+        return f'\'{value}\''
+    else:
+        return value
 
 def add_quotes(values):
     '''Add quotes to values depending on type'''
     # Add values to query
     for value in values[:-1]:
-        if type(value) == str:
-            query += f'\'{value}\', '
-        else:
-            query += f'{value}, '
+        query += f'{add_quote_individual(value)}, '
 
     # Add semicolon for last value
-    if type(values[-1]) == str:
-        query += f'\'{values[-1]}\';' 
-    else:
-        query += f'{values[-1]}'
+    query += f'{add_quote_individual(values[-1])}'
 
     return query
 
@@ -123,15 +122,35 @@ def insert_row(table_name, values):
     '''Inserts VALUES into TABLE'''
 
     query = f'INSERT INTO {table_name} VALUES ('
-    query += add_quotes(values) 
+    query += add_quotes(values)
     query += f');'
 
     return(query)
 
 def update_row(table_name, old_values, new_values):
     '''Modifies OLD_VALUES by NEW_VALUES into TABLE'''
-    pass
+    query = f'UPDATE {table_name} SET '
+    attrs = config.attrs[config.table_names.index(table_name)]
+    for ind, at in enumerate(attrs[:-1]):
+        query += f'{at[0]} = {add_quote_individual(new_values[ind])}, '
+    query += f'{attrs[-1][0]} = {add_quote_individual(new_values[-1])} '
+    
+    query += 'WHERE '
+
+    for ind, at in enumerate(attrs[:-1]):
+        query += f'{at[0]} = {add_quote_individual(old_values[ind])} AND '
+    query += f'{attrs[-1][0]} = {add_quote_individual(old_values[-1])};'
+
+    return query
+
 
 def delete_row(table_name, values):
     '''Deletes rows which match VALUES into TABLE'''
-    pass
+    query = f'DELETE FROM {table_name} WHERE '
+    attrs = config.attrs[config.table_names.index(table_name)]
+    
+    for ind, at in enumerate(attrs[:-1]):
+        query += f'{at[0]} = {add_quote_individual(values[ind])} AND '
+    query += f'{attrs[-1][0]} = {add_quote_individual(values[-1])};'
+
+    return query
