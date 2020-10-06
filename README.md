@@ -35,13 +35,35 @@ Once you have either of the above installed in your system follow these steps:
     ```bash
     python3 cli.py 
     ```
+- Enter "Host", "User" and "Password" with the details of the user (with all permissions) created just after creating the database `dota`, respectively.
 
-    
-    
-    
-    
-    
-    
+    <img src="https://cdn.discordapp.com/attachments/689432710531252235/763073998477066250/unknown.png">
+- Finally, use `help` **to get started**.
+
+*Tip: use `list-tables` to show all tables.*
+
+## Current Functionalities
+
+The following image lists all functionalities in a tree hierarchy.
+
+<img src="https://media.discordapp.net/attachments/689432710531252235/763072897987379280/unknown.png?width=297&height=499">
+
+### Basic Functionalities
+
+As seen above, we have all basic functionalities to be used in the form as specified below.
+
+```py
+help
+exit
+list-tables
+
+delete <table_name> 
+insert <table_name>
+modify <table_name>
+```
+For, `insert`, `delete` and `modify` you shall have options once you execute the command as specified above.
+
+<img src="https://cdn.discordapp.com/attachments/689432710531252235/763078894001061938/unknown.png">
     
     
     
