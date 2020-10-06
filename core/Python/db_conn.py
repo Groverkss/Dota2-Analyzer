@@ -6,20 +6,21 @@ import click
 import query
 import updateq
 
-db_curr = None
+db_curr = []
 
 def db_connect(host, user, password):
-    try:
-        db_conn = pymysql.connect(host=host,
-                                  user=user,
-                                  password=password,
-                                  db='dota',
-                                  cursorclass=pymysql.cursors.DictCursor)
-        global db_curr
-        db_curr = db_conn.cursor()
-    except:
-        click.secho("Credentials invalid", fg='red')
-        exit()
+	try:
+		db_conn = pymysql.connect(host= host,
+		                          user= user,
+		                          password= password,
+		                          db='dota',	
+		                          cursorclass=pymysql.cursors.DictCursor)
+		global db_curr 
+		db_curr = db_conn.cursor()
+	except:
+		click.secho("Credentials invalid", fg = 'red')
+		exit()
+
 
 
 def print_query(query):
@@ -38,11 +39,11 @@ def print_query(query):
     output = [list(row.values()) for row in output]
 
     click.secho(tabulate(output, headers, tablefmt='fancy_grid'), fg='yellow')
-
+    
 
 def list_tables():
-    print_query("show tables;")
-
+	print_query("show tables;")
+	
 
 def team_matches(team):
     '''Get all matches played by a team'''
@@ -67,58 +68,54 @@ def winrate_greater_player(player, x):
     query = query_maker.hero_win_rate(player, x)
     print_query(query)
 
-
 def winrate_greater(x):
     '''Get all Heroes with win-rate >= x'''
     query = query_maker.hero_win_rate_all(x)
     print_query(query)
-
 
 def wins_by_pattr(player, primary_att):
     '''Total wins by a player for all heroes of a given primary attribute'''
     query = query_maker.player_attr_wins(player, primary_att)
     print_query(query)
 
-
 def total_time(player):
     '''Total time by a player in all matches'''
     query = query_maker.total_time_player(player)
     print_query(query)
-
 
 def total_wins(player):
     '''Total wins by player in all the matches'''
     query = query_maker.total_win_player(player)
     print_query(query)
 
-
 def find_hero(hero):
     '''Get info about a hero'''
     query = query_maker.partial_search_hero(hero)
     print_query(query)
-
 
 def find_player(player):
     '''Get info about a player'''
     query = query_maker.partial_search_player(player)
     print_query(query)
 
-
 def player_report():
-    query = query_maker.player_report()
-    print(query)
-
+	'''Get report of all the players'''
+	query = query_maker.player_report()
+	print_query(query)
 
 def team_report():
-    query = query_maker.team_report()
-    print(query)
+	'''Gets report of all the teams'''
+	query = query_maker.team_report()
+	print_query(query)
 
-
-def tournament_report(tournament):
-    query = query_maker.tournament_report(tournament)
-    print(query)
-
+def tournament_report(option):
+	'''Shows the tournament standings'''
+	query = query_maker.tournament_report(option)
+	print_query(query)
 
 def hero_report():
-    query = query_maker.hero_report()
-    print(query)
+	'''Shows the hero and the matches played'''
+	query = query_maker.hero_report()
+	print_query(query)
+
+

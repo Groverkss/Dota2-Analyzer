@@ -1,4 +1,5 @@
 import config
+import click
 
 
 def all_match_team(team):
@@ -100,13 +101,11 @@ def partial_search_player(partial_player):
     query = f'SELECT * FROM players WHERE name LIKE \'{partial_player}%\';'
     return query
 
-
 def add_quote_individual(value):
     if type(value) == str:
         return f'\'{value}\''
     else:
         return value
-
 
 def add_quotes(values):
     '''Add quotes to values depending on type'''
@@ -129,7 +128,6 @@ def insert_row(table_name, values):
 
     return(query)
 
-
 def update_row(table_name, old_values, new_values):
     '''Modifies OLD_VALUES by NEW_VALUES into TABLE'''
     query = f'UPDATE {table_name} SET '
@@ -137,7 +135,7 @@ def update_row(table_name, old_values, new_values):
     for ind, at in enumerate(attrs[:-1]):
         query += f'{at[0]} = {add_quote_individual(new_values[ind])}, '
     query += f'{attrs[-1][0]} = {add_quote_individual(new_values[-1])} '
-
+    
     query += 'WHERE '
 
     for ind, at in enumerate(attrs[:-1]):
@@ -151,7 +149,7 @@ def delete_row(table_name, values):
     '''Deletes rows which match VALUES into TABLE'''
     query = f'DELETE FROM {table_name} WHERE '
     attrs = config.attrs[config.table_names.index(table_name)]
-
+    
     for ind, at in enumerate(attrs[:-1]):
         query += f'{at[0]} = {add_quote_individual(values[ind])} AND '
     query += f'{attrs[-1][0]} = {add_quote_individual(values[-1])};'
@@ -159,11 +157,11 @@ def delete_row(table_name, values):
     return query
 
 
-# ANALYSIS
+## ANALYSIS
 
 def player_report():
-    '''Ranks of players based on the number of wins'''
-    query = f'WITH team_player AS (SELECT player_id, team_name FROM teams_player)\
+    '''Ranks of players based on the number of wins'''  
+    query = 'WITH team_player AS (SELECT player_id, team_name FROM teams_player)\
             , wins AS (SELECT team_name, wins FROM teams), \
             win_ids AS (SELECT team_player.player_id AS player_id, wins \
             FROM team_player, wins \
@@ -174,16 +172,31 @@ def player_report():
     return query
 
 
+
 def team_report():
-    query = f'SELECT team_name AS teams, wins FROM teams ORDER BY wins DESC;'
+    '''Orders teams by the wins'''
+    query = 'SELECT team_name AS teams, wins FROM teams ORDER BY wins DESC;'
+    return query    
+
+
+def tournament_report(option):
+    if option.lower() == "teams":
+        query = 'WITH tournament AS (SELECT winner, tournament, COUNT(match_id) AS wins \
+            FROM matches GROUP BY winner, tournament ORDER BY  wins DESC, tournament ASC) \
+            SELECT * FROM tournament;'
+    else:
+        query = 'WITH hero AS (SELECT match_description.hero_name, matches.tournament AS tour, \
+            COUNT(match_description.match_id) AS matches_played FROM matches, match_description \
+            WHERE matches.match_id  = match_description.match_id GROUP BY matches.tournament, \
+            match_description.hero_name ORDER BY matches_played DESC) \
+            SELECT * FROM hero ORDER BY tour, matches_played DESC;'
+
     return query
 
-
-def tournament_report(tournament):
-    query = f'WITH tournament AS (SELECT winner, tournament, COUNT(match_id) AS wins \
-    FROM matches GROUP BY winner, tournament ORDER BY  wins DESC, tournament ASC) \
-    SELECT * FROM tournament;'
-
-
 def hero_report():
-    return "hero report"
+    query = 'WITH hero AS (SELECT match_description.hero_name AS hero, \
+        COUNT(match_description.match_id) AS matches_played FROM matches, match_description \
+        WHERE matches.match_id  = match_description.match_id GROUP BY \
+        match_description.hero_name ORDER BY matches_played DESC) \
+        SELECT * FROM hero ORDER BY matches_played DESC;'
+    return query

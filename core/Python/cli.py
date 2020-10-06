@@ -16,12 +16,11 @@ on_shell_exit = OnExit()
 
 
 @shell(prompt='dotabase > ', intro='Welcome to Dotabase...', on_finished=on_shell_exit)
-def dota():
-    host = click.prompt(updateq.format_att("host", "green"), type=str)
-    user = click.prompt(updateq.format_att("user", "green"), type=str)
-    password = click.prompt(updateq.format_att("password", "green"), 
-            type=str, default='')
-    db_conn.db_connect(host, user, password)
+def dota():	
+	host = click.prompt(updateq.format_att("host", "green"), type=str)
+	user = click.prompt(updateq.format_att("user", "green"), type=str)
+	password = click.prompt(updateq.format_att("password", "green"), type=str)
+	db_conn.db_connect(host, user, password)
 
 
 @dota.command()
@@ -131,7 +130,6 @@ def wins_by_pattr(player, primary_att):
     '''Total wins by a player for all heroes of a given primary attribute'''
     db_conn.wins_by_pattr(player, primary_att)
 
-
 @aggregate.command()
 @click.argument('player')
 def total_time(player):
@@ -195,10 +193,10 @@ def team_report():
 
 
 @analysis.command()
-@click.argument('tournament')
-def tour_report(tournament):
-    '''Generate a report of the tournament'''
-    db_conn.tournament_report()
+@click.argument('option')
+def tour_report(option):
+    '''Generate a report of the tournaments'''
+    db_conn.tournament_report(option)
 
 
 @analysis.command()
