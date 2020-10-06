@@ -1,5 +1,7 @@
 # Dota2-Analyzer
 
+[![HackMD documents](https://hackmd.io/badge.svg)](https://hackmd.io/@jkyang/GitOnion-gitonion.github.io)
+
 > We said to Kunwar that if he doesn't stop playing Dota, then we will not help him in the project.
 > Kunwar replied back: "I will report you."
 
