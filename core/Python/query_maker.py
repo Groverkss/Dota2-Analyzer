@@ -99,3 +99,26 @@ def partial_search_player(partial_player):
 
     query = f'SELECT * FROM players WHERE name LIKE \'{partial_player}%\';'
     return query
+
+
+def insert_row(table_name, values):
+    '''Inserts VALUES into TABLE'''
+
+    query = f'INSERT INTO {table_name} VALUES ('
+
+    no_attrs = len(values)
+
+    # Add values to query
+    for value in values[:-1]:
+        if type(value) == str:
+            query += f'\'{value}\', '
+        else:
+            query += f'{value}, '
+
+    # Add semicolon for last value
+    if type(values[-1]) == str:
+        query += f'\'{values[-1]}\';' 
+    else:
+        query += f'{values[-1]});'
+
+    return(query)
