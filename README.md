@@ -11,6 +11,7 @@ But, Kunwar did stop playing Dota. And as a result, we finally have Dota2-Analyz
 1. Kunwar Shaanjeet Singh Grover
 2. Alapan Chaudhuri
 3. Zeeshan Ahmed
+--------------------------------------------------------------------------------------------------------------------
 
 ## How to get started?
 Install MySQL or MariaDB in order to be able to utilize our Database Dump. MariaDB is similar to MySQL but is also faster to use and easier to install.
@@ -41,6 +42,7 @@ Once you have either of the above installed in your system follow these steps:
 - Finally, use `help` **to get started**.
 
 *Tip: use `list-tables` to show all tables.*
+----------------------------------------------------------------------------------------------------------------
 
 ## Current Functionalities
 
@@ -64,11 +66,11 @@ modify <table_name>
 For, `insert`, `delete` and `modify` you shall have options once you execute the command as specified above.
 
 <img src="https://cdn.discordapp.com/attachments/689432710531252235/763078894001061938/unknown.png">
----
+
 <img src="https://cdn.discordapp.com/attachments/689432710531252235/763079479462854726/unknown.png">
----
+
 <img src="https://cdn.discordapp.com/attachments/689432710531252235/763079606475161610/unknown.png">
----
+------------------------------------------------------------------------------------------------------------------------
 
 ## Analysis
 
@@ -100,6 +102,7 @@ We have analysis results for 4 associated reports, namely:
     analysis tour-report heroes
     ```
     *Performace of a team and usage of a hero in tournaments are projected, respectively.*
+---------------------------------------------------------------------------------------------------------------------
 
 ## Retrieval
 
@@ -115,3 +118,4 @@ We have analysis results for 4 associated reports, namely:
 6. **select**: *Selection commands on database.*
 
     <img src="https://cdn.discordapp.com/attachments/702963059764887656/763094726328451072/unknown.png">
+-----------------------------------------------------------------------------------------------------------------------
