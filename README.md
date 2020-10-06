@@ -64,8 +64,54 @@ modify <table_name>
 For, `insert`, `delete` and `modify` you shall have options once you execute the command as specified above.
 
 <img src="https://cdn.discordapp.com/attachments/689432710531252235/763078894001061938/unknown.png">
+---
+<img src="https://cdn.discordapp.com/attachments/689432710531252235/763079479462854726/unknown.png">
+---
+<img src="https://cdn.discordapp.com/attachments/689432710531252235/763079606475161610/unknown.png">
+---
+
+## Analysis
+
+We have analysis results for 4 associated reports, namely:
+
+1. **hero-report**
+    ```
+    analysis hero-report
+    ```
+    *Projection of all the heroes based on the matches played.*
+
+3. **player-report**
+    ```
+    analysis player-report
+    ```
+    *Generating a report of all the players based on the wins.*
     
+5. **team-report**
+    ```
+    analysis team-report
+    ```
+    *Performance of all the teams based on history are generated.*
+
+    <img src="https://cdn.discordapp.com/attachments/689432710531252235/763070206670143519/unknown.png">
     
-    
-    
-    
+7. **tour-report**
+    ```
+    analysis tour-report teams
+    analysis tour-report heroes
+    ```
+    *Performace of a team and usage of a hero in tournaments are projected, respectively.*
+
+## Retrieval
+
+1. **aggregate**: *Commands for doing aggregate operations on database.*
+
+    <img src="https://cdn.discordapp.com/attachments/702963059764887656/763094586842808320/unknown.png">
+3. **project**: *Projection commands on database.*
+
+    <img src="https://cdn.discordapp.com/attachments/702963059764887656/763094662549733406/unknown.png">
+5. **search**: *Commands for doing partial search on database.*
+
+    <img src="https://cdn.discordapp.com/attachments/702963059764887656/763094879995559967/unknown.png">
+6. **select**: *Selection commands on database.*
+
+    <img src="https://cdn.discordapp.com/attachments/702963059764887656/763094726328451072/unknown.png">
