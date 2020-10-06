@@ -5,6 +5,7 @@ import query
 import query_maker
 from db_conn import db_curr
 
+
 def format_att(attribute, color):
     attribute = attribute.replace('_', ' ')
     attribute = attribute.title()
@@ -64,7 +65,6 @@ def modify(table):
             old_values.append(old_value)
         new_values.append(new_value)
 
-
     query = query_maker.update_row(table, old_values, new_values)
 
     try:
@@ -72,7 +72,6 @@ def modify(table):
         db_curr.commit()
     except:
         db_curr.rollback()
-
 
 
 def delete(table):
