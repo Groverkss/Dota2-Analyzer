@@ -17,10 +17,10 @@ on_shell_exit = OnExit()
 
 @shell(prompt='dotabase > ', intro='Welcome to Dotabase...', on_finished=on_shell_exit)
 def dota():
-    host = input("Enter your host for sql:")
-    user = input("Enter your username:")
-    password = input("Passwod:")
-    db_conn(host, user, password)
+	host = click.prompt(updateq.format_att("host", "green"), type=str)
+	user = click.prompt(updateq.format_att("user", "green"), type=str)
+	password = click.prompt(updateq.format_att("password", "green"), type=str)
+	db_conn.db_connect(host, user, password)
 
 
 @dota.command()

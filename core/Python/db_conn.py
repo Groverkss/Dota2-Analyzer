@@ -7,13 +7,17 @@ import query
 import updateq
 
 def db_connect(host, user, password):
-	db_conn = pymysql.connect(host= host,
-	                          user= user,
-	                          password= password,
-	                          db='dota',
-	                          cursorclass=pymysql.cursors.DictCursor)
+	try:
+		db_conn = pymysql.connect(host= host,
+		                          user= user,
+		                          password= password,
+		                          db='dota',
+		                          cursorclass=pymysql.cursors.DictCursor)
+		db_curr = db_conn.cursor()
+	except:
+		click.secho("Credentials invalid", fg = 'red')
+		exit()
 
-	db_curr = db_conn.cursor()
 
 
 def print_query(query):
