@@ -26,6 +26,10 @@ Once you have either of the above installed in your system follow these steps:
     GRANT ALL PRIVILEGES ON dota.* TO '<user>'@'localhost';
     exit
 	```
+- Dump the Dota2-Analyzer database into `dota` from `core/SQL` using:
+	```bash
+	mysql -u <user> -p dota < dota_dump.sql
+	```
 :warning: **You must use Python 3**: Not using python3 might cause unnecessary problems.
 - Create a virtual environment and install dependencies:
     ```bash
