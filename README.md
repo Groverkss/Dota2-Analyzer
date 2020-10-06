@@ -16,8 +16,8 @@ But, Kunwar did stop playing Dota. And as a result, we finally have Dota2-Analyz
 Install MySQL or MariaDB in order to be able to utilize our Database Dump. MariaDB is similar to MySQL but is also faster to use and easier to install.
 
 Once you have either of the above installed in your system follow these steps:
-- Enter in `mysql`
-- Create a database named **dota** using 
+- Enter in `mysql`.
+- Create a database named **dota** using: 
 	```sql
 	CREATE DATABASE dota CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
     CREATE USER '<user>'@'localhost' IDENTIFIED BY '<password>';
@@ -25,13 +25,13 @@ Once you have either of the above installed in your system follow these steps:
     exit
 	```
 :warning: **You must use Python 3**: Not using python3 might cause unnecessary problems.
-- Create a virtual environment and install dependencies
+- Create a virtual environment and install dependencies:
     ```bash
     python3 -m venv env
     . /env/vin/activate
     pip3 install -r requirements.txt
     ```
-- Relocate yourself to `core/Python` and run the following
+- Relocate yourself to `core/Python` and run the following:
     ```bash
     python3 cli.py 
     ```
