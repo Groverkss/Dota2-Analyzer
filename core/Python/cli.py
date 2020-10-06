@@ -16,11 +16,11 @@ on_shell_exit = OnExit()
 
 
 @shell(prompt='dotabase > ', intro='Welcome to Dotabase...', on_finished=on_shell_exit)
-def dota():
-	host = click.prompt(updateq.format_att("host", "green"), type=str)
-	user = click.prompt(updateq.format_att("user", "green"), type=str)
-	password = click.prompt(updateq.format_att("password", "green"), type=str)
-	db_conn.db_connect(host, user, password)
+def dota():	
+	# host = click.prompt(updateq.format_att("host", "green"), type=str)
+	# user = click.prompt(updateq.format_att("user", "green"), type=str)
+	# password = click.prompt(updateq.format_att("password", "green"), type=str)
+	db_conn.db_connect("host", "user", "password")
 
 
 @dota.command()
@@ -183,26 +183,26 @@ def analysis():
 @analysis.command()
 def player_report():
     '''Generate a report of all the players based on their wins'''
-    pass
+    db_conn.player_report()
 
 
 @analysis.command()
 def team_report():
     '''Generate a report on performance of all the teams based on history'''
-    pass
+    db_conn.team_report()
 
 
 @analysis.command()
 @click.argument('tournament')
 def tour_report(tournament):
     '''Generate a report of the tournament'''
-    pass
+    db_conn.tournament_report()
 
 
 @analysis.command()
 def hero_report():
     '''Generate a report on all the heroes'''
-    pass
+    db_conn.hero_report()
 
 # --- Analysis Commands End ---
 
