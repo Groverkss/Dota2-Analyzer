@@ -101,13 +101,8 @@ def partial_search_player(partial_player):
     return query
 
 
-def insert_row(table_name, values):
-    '''Inserts VALUES into TABLE'''
-
-    query = f'INSERT INTO {table_name} VALUES ('
-
-    no_attrs = len(values)
-
+def add_quotes(values):
+    '''Add quotes to values depending on type'''
     # Add values to query
     for value in values[:-1]:
         if type(value) == str:
@@ -119,6 +114,24 @@ def insert_row(table_name, values):
     if type(values[-1]) == str:
         query += f'\'{values[-1]}\';' 
     else:
-        query += f'{values[-1]});'
+        query += f'{values[-1]}'
+
+    return query
+
+
+def insert_row(table_name, values):
+    '''Inserts VALUES into TABLE'''
+
+    query = f'INSERT INTO {table_name} VALUES ('
+    query += add_quotes(values) 
+    query += f');'
 
     return(query)
+
+def update_row(table_name, old_values, new_values):
+    '''Modifies OLD_VALUES by NEW_VALUES into TABLE'''
+    pass
+
+def delete_row(table_name, values):
+    '''Deletes rows which match VALUES into TABLE'''
+    pass
