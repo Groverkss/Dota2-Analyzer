@@ -6,20 +6,20 @@ import click
 import query
 import updateq
 
-db_curr = []
+db_curr = None
 
 def db_connect(host, user, password):
-	try:
-		db_conn = pymysql.connect(host= host,
-		                          user= user,
-		                          password= password,
-		                          db='dota',	
-		                          cursorclass=pymysql.cursors.DictCursor)
-		global db_curr 
-		db_curr = db_conn.cursor()
-	except:
-		click.secho("Credentials invalid", fg = 'red')
-		exit()
+    try:
+        db_conn = pymysql.connect(host=host,
+                                  user=user,
+                                  password=password,
+                                  db='dota',    
+                                  cursorclass=pymysql.cursors.DictCursor)
+        global db_curr 
+        db_curr = db_conn.cursor()
+    except:
+        click.secho("Credentials invalid", fg='red')
+        exit()
 
 
 
@@ -41,9 +41,10 @@ def print_query(query):
     click.secho(tabulate(output, headers, tablefmt='fancy_grid'), fg='yellow')
     
 
+
 def list_tables():
-	print_query("show tables;")
-	
+    print_query("show tables;")
+    
 
 def team_matches(team):
     '''Get all matches played by a team'''
@@ -99,23 +100,23 @@ def find_player(player):
     print_query(query)
 
 def player_report():
-	'''Get report of all the players'''
-	query = query_maker.player_report()
-	print_query(query)
+    '''Get report of all the players'''
+    query = query_maker.player_report()
+    print_query(query)
 
 def team_report():
-	'''Gets report of all the teams'''
-	query = query_maker.team_report()
-	print_query(query)
+    '''Gets report of all the teams'''
+    query = query_maker.team_report()
+    print_query(query)
 
 def tournament_report(option):
-	'''Shows the tournament standings'''
-	query = query_maker.tournament_report(option)
-	print_query(query)
+    '''Shows the tournament standings'''
+    query = query_maker.tournament_report(option)
+    print_query(query)
 
 def hero_report():
-	'''Shows the hero and the matches played'''
-	query = query_maker.hero_report()
-	print_query(query)
+    '''Shows the hero and the matches played'''
+    query = query_maker.hero_report()
+    print_query(query)
 
 
