@@ -1,13 +1,9 @@
 import click
 from termcolor import colored
 import config
-<<<<<<< HEAD
 import query
-=======
 import query_maker
 from db_conn import db_curr
-
->>>>>>> 657479d2c9d51cfe3eee468bbc629138315b7360
 
 def format_att(attribute, color):
     attribute = attribute.replace('_', ' ')
@@ -31,12 +27,6 @@ def insert(table):
                              type=(str if quote else int))
         values.append(value)
 
-<<<<<<< HEAD
-    # TODO: Add values to database
-    query = query.insert_row(table, values)
-    print(query)
-    
-=======
     query = query_maker.insert_row(table, values)
 
     try:
@@ -44,7 +34,6 @@ def insert(table):
         db_curr.commit()
     except:
         db_curr.rollback()
->>>>>>> 657479d2c9d51cfe3eee468bbc629138315b7360
 
 
 def modify(table):
@@ -75,11 +64,15 @@ def modify(table):
             old_values.append(old_value)
         new_values.append(new_value)
 
-    print(new_values)
-    print(old_values)
 
-    # TODO: Modify values to database
-    # TODO: If no change, dont change the database
+    query = query_maker.update_row(table, old_values, new_values)
+
+    try:
+        db_curr.execute(query)
+        db_curr.commit()
+    except:
+        db_curr.rollback()
+
 
 
 def delete(table):
@@ -101,7 +94,10 @@ def delete(table):
 
         values.append(value)
 
-    print(values)
+    query = query_maker.delete_row(table, values)
 
-    # TODO: Delete values to database
-    # TODO: If all default, delete the whole table
+    try:
+        db_curr.execute(query)
+        db_curr.commit()
+    except:
+        db_curr.rollback()

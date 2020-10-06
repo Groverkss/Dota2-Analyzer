@@ -6,6 +6,8 @@ import click
 import query
 import updateq
 
+db_curr = None
+
 def db_connect(host, user, password):
 	try:
 		db_conn = pymysql.connect(host= host,
@@ -13,6 +15,7 @@ def db_connect(host, user, password):
 		                          password= password,
 		                          db='dota',
 		                          cursorclass=pymysql.cursors.DictCursor)
+		global db_curr 
 		db_curr = db_conn.cursor()
 	except:
 		click.secho("Credentials invalid", fg = 'red')
