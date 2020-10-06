@@ -3,14 +3,21 @@ import pymysql.cursors
 import query_maker
 from tabulate import tabulate
 import click
+import query
+import updateq
 
-db_conn = pymysql.connect(host='localhost',
-                          user='kunwar',
-                          password='',
-                          db='dota',
-                          cursorclass=pymysql.cursors.DictCursor)
+def db_connect(host, user, password):
+	try:
+		db_conn = pymysql.connect(host= host,
+		                          user= user,
+		                          password= password,
+		                          db='dota',
+		                          cursorclass=pymysql.cursors.DictCursor)
+		db_curr = db_conn.cursor()
+	except:
+		click.secho("Credentials invalid", fg = 'red')
+		exit()
 
-db_curr = db_conn.cursor()
 
 
 def print_query(query):
@@ -29,7 +36,9 @@ def print_query(query):
     output = [list(row.values()) for row in output]
 
     click.secho(tabulate(output, headers, tablefmt='fancy_grid'), fg='yellow')
+    
 
+	
 
 def team_matches(team):
     '''Get all matches played by a team'''
