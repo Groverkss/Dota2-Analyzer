@@ -3,7 +3,7 @@ from termcolor import colored
 import config
 import query
 import query_maker
-import db_conn
+from db_conn import db_curr
 
 def format_att(attribute, color):
     attribute = attribute.replace('_', ' ')
@@ -30,10 +30,10 @@ def insert(table):
     query = query_maker.insert_row(table, values)
 
     try:
-        db_conn.db_curr.execute(query)
-        db_conn.db_curr.commit()
+        db_curr.execute(query)
+        db_curr.commit()
     except:
-        db_conn.db_curr.rollback()
+        db_curr.rollback()
 
 
 def modify(table):
