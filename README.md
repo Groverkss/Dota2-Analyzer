@@ -53,6 +53,8 @@ Once you have either of the above installed in your system follow these steps:
 
 The following image lists all functionalities in a tree hierarchy.
 
+All the functionalities support auto-complete, make sure you use them :stuck_out_tongue: .
+
 <img src="https://media.discordapp.net/attachments/689432710531252235/763072897987379280/unknown.png?width=297&height=499">
 
 ### Basic Functionalities
