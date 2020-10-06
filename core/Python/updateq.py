@@ -1,7 +1,13 @@
 import click
 from termcolor import colored
 import config
+<<<<<<< HEAD
 import query
+=======
+import query_maker
+from db_conn import db_curr
+
+>>>>>>> 657479d2c9d51cfe3eee468bbc629138315b7360
 
 def format_att(attribute, color):
     attribute = attribute.replace('_', ' ')
@@ -10,7 +16,7 @@ def format_att(attribute, color):
 
 
 def insert(table):
-    '''Prompts for data and insert to corresponding TABLE'''
+    '''Prompts for data for insertion to corresponding TABLE'''
 
     try:
         index = config.table_names.index(table)
@@ -25,10 +31,20 @@ def insert(table):
                              type=(str if quote else int))
         values.append(value)
 
+<<<<<<< HEAD
     # TODO: Add values to database
     query = query.insert_row(table, values)
     print(query)
     
+=======
+    query = query_maker.insert_row(table, values)
+
+    try:
+        db_curr.execute(query)
+        db_curr.commit()
+    except:
+        db_curr.rollback()
+>>>>>>> 657479d2c9d51cfe3eee468bbc629138315b7360
 
 
 def modify(table):
