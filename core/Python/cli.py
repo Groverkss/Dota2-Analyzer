@@ -51,6 +51,7 @@ def modify(table):
 
 @dota.group()
 def retrieve():
+    '''Retrieval commands on database'''
     pass
 
 
@@ -58,6 +59,7 @@ def retrieve():
 
 @retrieve.group()
 def select():
+    '''Selection commands on database'''
     pass
 
 
@@ -89,6 +91,7 @@ def match_against(team1, team2):
 
 @retrieve.group()
 def project():
+    '''Projection commands on database'''
     pass
 
 
@@ -113,6 +116,7 @@ def winrate_greater(x):
 
 @retrieve.group()
 def aggregate():
+    '''Commands for doing aggregate operations on database'''
     pass
 
 
@@ -143,6 +147,7 @@ def total_wins(player):
 
 @retrieve.group()
 def search():
+    '''Commands for doing partial search on database'''
     pass
 
 
@@ -168,6 +173,7 @@ def find_player(player):
 
 @dota.group()
 def analysis():
+    '''Commands related to generating analysis reports'''
     pass
 
 

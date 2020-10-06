@@ -3,32 +3,36 @@ import config
 
 def all_match_team(team):
     '''Returns the query required to display all the matches played by a team'''
+
     query = f'SELECT * FROM matches \
-    WHERE (winner = "{team}" OR loser = "{team}");'
+            WHERE (winner = "{team}" OR loser = "{team}");'
     return query
 
 
 def all_match_player(player):
     '''Returns the query required to display all the matches played by a player'''
+
     query = f'WITH player_id AS (SELECT steam_id FROM players WHERE\
-    steam_name = "{player}")\
-    , matches_id AS (SELECT match_id FROM match_description, player_id WHERE\
-    player_id.steam_id = match_description.steam_id)\
-    SELECT matches.* FROM matches, matches_id WHERE\
-    matches.match_id = matches_id.match_id;'
+            steam_name = "{player}")\
+            , matches_id AS (SELECT match_id FROM match_description, player_id WHERE\
+            player_id.steam_id = match_description.steam_id)\
+            SELECT matches.* FROM matches, matches_id WHERE\
+            matches.match_id = matches_id.match_id;'
     return query
 
 
 def all_match_two_teams(team_1, team_2):
     '''Returns the query required to display all the matches played betwee 2 teams'''
+
     query = f'SELECT * FROM matches \
-    WHERE (winner LIKE "{team_1}" OR loser LIKE "{team_2}");'
+            WHERE (winner LIKE "{team_1}" OR loser LIKE "{team_2}");'
     return query
 
 
 def hero_win_rate(player, win_rate):
     '''Given a win rate it will display all the players and hero pairs with
-        win rate greater than given win rate''' 
+       win rate greater than given win rate'''
+
     query = f'WITH player_id AS (SELECT steam_id FROM players WHERE\
             steam_name = "{player}")\
             SELECT player_characters.hero_name, player_characters.wins AS wins, player_characters.matches_played AS matches_played FROM\
@@ -36,8 +40,10 @@ def hero_win_rate(player, win_rate):
             player_characters.steam_id = player_id.steam_id;'
     return query
 
+
 def hero_win_rate_all(win_rate):
     '''Given a win rate it will display heroes with win rate greater than given win rate'''
+
     query = f'WITH hero_aggr AS (SELECT hero_name, SUM(wins) AS wins, \
             SUM(matches_played) AS matches_played FROM\
             player_characters GROUP BY hero_name)\
@@ -48,6 +54,7 @@ def hero_win_rate_all(win_rate):
 
 def player_attr_wins(player, attribute):
     '''For a given player and attribute, it returns the number of wins'''
+
     query = f'WITH id AS (SELECT steam_id FROM players \
             WHERE steam_name = \'{player}\'), player_heroes AS \
             (SELECT player_characters.wins, player_characters.hero_name \
@@ -60,6 +67,7 @@ def player_attr_wins(player, attribute):
 
 def total_time_player(player):
     '''Total time for a player in all the matches'''
+
     query = f'WITH player_id AS (SELECT steam_name, steam_id FROM players WHERE\
             steam_name = "{player}")\
             , matches_id AS (SELECT player_id.steam_name, match_id FROM match_description, \
@@ -71,6 +79,7 @@ def total_time_player(player):
 
 def total_win_player(player):
     '''Total wins of a player'''
+
     query = f'WITH player_id AS (SELECT steam_name, steam_id FROM players WHERE\
             steam_name = "{player}")\
             SELECT player_id.steam_name, SUM(wins) AS wins FROM player_id, player_characters\
@@ -80,11 +89,13 @@ def total_win_player(player):
 
 def partial_search_hero(partial_hero):
     '''Partial text search for hero names'''
+
     query = f'SELECT * FROM heroes WHERE name LIKE \'{partial_hero}%\';'
     return query
 
 
 def partial_search_player(partial_player):
     '''Partial text search for player names'''
+
     query = f'SELECT * FROM players WHERE name LIKE \'{partial_player}%\';'
     return query
