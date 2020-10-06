@@ -17,7 +17,8 @@ def db_connect(host, user, password):
                                   user= user,
                                   password= password,
                                   db='dota',    
-                                  cursorclass=pymysql.cursors.DictCursor)
+                                  cursorclass=pymysql.cursors.DictCursor,
+                                  autocommit = True)
         db_curr = db_conn.cursor()
     except:
         click.secho("Credentials invalid", fg = 'red')
@@ -130,7 +131,7 @@ def format_att(attribute, color):
 
 def insert(table):
     '''Prompts for data for insertion to corresponding TABLE'''
-
+    global db_conn, db_curr
     try:
         index = config.table_names.index(table)
     except:
@@ -145,17 +146,17 @@ def insert(table):
         values.append(value)
 
     query = query_maker.insert_row(table, values)
-
+    
     try:
         db_curr.execute(query)
-        db_curr.commit()
+        db_conn.commit()
     except:
         db_conn.rollback()
 
 
 def modify(table):
     '''Prompts for data and modifys to corresponding TABLE'''
-
+    global db_conn, db_curr
     try:
         index = config.table_names.index(table)
     except:
@@ -186,7 +187,7 @@ def modify(table):
 
     try:
         db_curr.execute(query)
-        db_curr.commit()
+        db_conn.commit()
     except:
         db_conn.rollback()
 
@@ -194,7 +195,7 @@ def modify(table):
 
 def delete(table):
     '''Prompts for data and modifys to corresponding TABLE'''
-
+    global db_conn, db_curr
     try:
         index = config.table_names.index(table)
     except:
@@ -215,7 +216,7 @@ def delete(table):
 
     try:
         db_curr.execute(query)
-        db_curr.commit()
+        db_conn.commit()
     except:
         db_conn.rollback()
 
