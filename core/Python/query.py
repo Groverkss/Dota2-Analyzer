@@ -16,4 +16,4 @@ def insert_row(table_name, values):
     # Add semicolon for last value
     query += f'{values[no_attrs - 1]});'
 
-    print(query)
+    return query

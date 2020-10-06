@@ -1,7 +1,7 @@
 import click
 from termcolor import colored
 import config
-
+import query
 
 def format_att(attribute, color):
     attribute = attribute.replace('_', ' ')
@@ -25,9 +25,10 @@ def insert(table):
                              type=(str if quote else int))
         values.append(value)
 
-    print(values)
-
     # TODO: Add values to database
+    query = query.insert_row(table, values)
+    print(query)
+    
 
 
 def modify(table):
