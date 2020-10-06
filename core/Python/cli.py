@@ -1,8 +1,6 @@
 import click
 from click_shell import shell
-import updateq
 import db_conn
-
 
 # Class to handle shell exiting
 class OnExit():
@@ -17,9 +15,10 @@ on_shell_exit = OnExit()
 
 @shell(prompt='dotabase > ', intro='Welcome to Dotabase...', on_finished=on_shell_exit)
 def dota():	
-	host = click.prompt(updateq.format_att("host", "green"), type=str)
-	user = click.prompt(updateq.format_att("user", "green"), type=str)
-	password = click.prompt(updateq.format_att("password", "green"), type=str)
+	host = click.prompt(db_conn.format_att("host", "green"), type=str)
+	user = click.prompt(db_conn.format_att("user", "green"), type=str)
+	password = click.prompt(db_conn.format_att("password", "green"),
+                type=str, default='')
 	db_conn.db_connect(host, user, password)
 
 
@@ -34,21 +33,21 @@ def list_tables():
 @click.argument('table')
 def insert(table):
     '''Insert data into the corresponding TABLE'''
-    updateq.insert(table)
+    db_conn.insert(table)
 
 
 @dota.command()
 @click.argument('table')
 def delete(table):
     '''Delete data from the corresponding TABLE'''
-    updateq.delete(table)
+    db_conn.delete(table)
 
 
 @dota.command()
 @click.argument('table')
 def modify(table):
     '''Modify data from a corresponding TABLE'''
-    updateq.modify(table)
+    db_conn.modify(table)
 
 # --- Retrival Commands Start ---
 
