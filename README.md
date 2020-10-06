@@ -27,6 +27,7 @@ Once you have either of the above installed in your system follow these steps:
     exit
 	```
 - Dump the Dota2-Analyzer database into `dota` from `core/SQL` using:
+	
 	```bash
 	mysql -u <user> -p dota < dota_dump.sql
 	```
