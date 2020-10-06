@@ -110,6 +110,7 @@ def add_quote_individual(value):
 def add_quotes(values):
     '''Add quotes to values depending on type'''
     # Add values to query
+    query = ""
     for value in values[:-1]:
         query += f'{add_quote_individual(value)}, '
 
@@ -126,7 +127,7 @@ def insert_row(table_name, values):
     query += add_quotes(values)
     query += f');'
 
-    return(query)
+    return query
 
 def update_row(table_name, old_values, new_values):
     '''Modifies OLD_VALUES by NEW_VALUES into TABLE'''

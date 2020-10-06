@@ -8,17 +8,18 @@ import updateq
 
 db_curr = None
 
+
 def db_connect(host, user, password):
     try:
-        db_conn = pymysql.connect(host=host,
-                                  user=user,
-                                  password=password,
+        db_conn = pymysql.connect(host= host,
+                                  user= user,
+                                  password= password,
                                   db='dota',    
                                   cursorclass=pymysql.cursors.DictCursor)
         global db_curr 
         db_curr = db_conn.cursor()
     except:
-        click.secho("Credentials invalid", fg='red')
+        click.secho("Credentials invalid", fg = 'red')
         exit()
 
 
@@ -40,7 +41,6 @@ def print_query(query):
 
     click.secho(tabulate(output, headers, tablefmt='fancy_grid'), fg='yellow')
     
-
 
 def list_tables():
     print_query("show tables;")

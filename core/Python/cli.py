@@ -16,17 +16,18 @@ on_shell_exit = OnExit()
 
 
 @shell(prompt='dotabase > ', intro='Welcome to Dotabase...', on_finished=on_shell_exit)
-def dota(): 
-    host = click.prompt(updateq.format_att("host", "green"), type=str)
-    user = click.prompt(updateq.format_att("user", "green"), type=str)
-    password = click.prompt(updateq.format_att("password", "green"), type=str)
-    db_conn.db_connect(host, user, password)
+def dota():	
+	host = click.prompt(updateq.format_att("host", "green"), type=str)
+	user = click.prompt(updateq.format_att("user", "green"), type=str)
+	password = click.prompt(updateq.format_att("password", "green"), type=str)
+	db_conn.db_connect(host, user, password)
 
 
 @dota.command()
 def list_tables():
     '''Lists available tables in database'''
     print("Listing available tables")
+    db_conn.list_tables()
 
 
 @dota.command()
@@ -49,8 +50,8 @@ def modify(table):
     '''Modify data from a corresponding TABLE'''
     updateq.modify(table)
 
-
 # --- Retrival Commands Start ---
+
 
 @dota.group()
 def retrieve():
@@ -89,8 +90,8 @@ def match_against(team1, team2):
 
 # --- Select Commands End ---
 
-
 # --- Project Commands Start ---
+
 
 @retrieve.group()
 def project():
